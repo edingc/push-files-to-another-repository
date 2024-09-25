@@ -6,13 +6,14 @@ set -u  # script fails if trying to access an undefined variable
 echo
 echo "##### Starting #####"
 SOURCE_FILES="$1"
-DESTINATION_USERNAME="$2"
-DESTINATION_REPOSITORY="$3"
-DESTINATION_BRANCH="$4"
-DESTINATION_DIRECTORY="$5"
-COMMIT_USERNAME="$6"
-COMMIT_EMAIL="$7"
-COMMIT_MESSAGE="$8"
+SOURCE_IS_PRIVATE="$2"
+DESTINATION_USERNAME="$3"
+DESTINATION_REPOSITORY="$4"
+DESTINATION_BRANCH="$5"
+DESTINATION_DIRECTORY="$6"
+COMMIT_USERNAME="$7"
+COMMIT_EMAIL="$8"
+COMMIT_MESSAGE="$9"
 
 if [ -z "$COMMIT_USERNAME" ]
 then
@@ -30,7 +31,13 @@ git config --global user.name "$COMMIT_USERNAME"
 # Remove git directory if it exists to prevent errors
 rm -rf .git
 
-git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY.git" repo
+if [ $SOURCE_IS_PRIVATE == "yes" ]
+then
+  git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY.git" repo
+else
+  git clone "https://github.com/$GITHUB_REPOSITORY.git" repo
+fi
+
 
 cd repo
 ls -la
