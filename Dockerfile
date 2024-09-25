@@ -1,6 +1,6 @@
-FROM alpine:3.12
+FROM ubuntu:latest
 
-RUN apk add --no-cache git
+RUN apt-get install -y git
 
 COPY entrypoint.sh /entrypoint.sh
 
