@@ -4,6 +4,10 @@ inputs:
   source-files:
     description: 'The files/directories to copy to the destination repository. Can have multiple space-separated filenames and globbing.'
     required: true
+  source-is-private:
+    description: 'Is the source repository private? (yes/no)'
+    default: 'no'
+    required: false
   destination-username:
     description: 'Name of the destination username/organization'
     required: true
@@ -34,6 +38,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.source-files }}
+    - ${{ inputs.source-is-private }}
     - ${{ inputs.destination-username }}
     - ${{ inputs.destination-repository }}
     - ${{ inputs.destination-branch }}
