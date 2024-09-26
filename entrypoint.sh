@@ -30,6 +30,7 @@ git config --global user.name "$COMMIT_USERNAME"
 
 # Remove git directory if it exists to prevent errors
 rm -rf .git
+rm -rf repo
 
 if [ "$SOURCE_IS_PRIVATE" = "yes" ]
 then
