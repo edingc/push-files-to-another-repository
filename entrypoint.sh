@@ -31,7 +31,7 @@ git config --global user.name "$COMMIT_USERNAME"
 # Remove git directory if it exists to prevent errors
 rm -rf .git
 
-if [ "$SOURCE_IS_PRIVATE" == "yes" ]
+if [ "$SOURCE_IS_PRIVATE" = "yes" ]
 then
   git clone "https://$API_TOKEN_GITHUB@github.com/$GITHUB_REPOSITORY.git" repo
 else
